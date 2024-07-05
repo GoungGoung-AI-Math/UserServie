@@ -19,7 +19,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-
                 .cors(cors -> cors.configurationSource(corsConfig.corsConfigurationSource()))
                 // CSRF 설정 비활성화
                 .csrf(AbstractHttpConfigurer::disable)
