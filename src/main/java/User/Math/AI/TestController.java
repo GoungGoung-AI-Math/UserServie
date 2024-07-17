@@ -34,6 +34,11 @@ public class TestController {
         Jwt decodedJwt = jwtDecoder.decode(token);
         return decodedJwt.getClaims();
     }
+
+    @GetMapping("/protected")
+    public String protectedEndpoint(@AuthenticationPrincipal Jwt jwt) {
+        return "Hello, " + jwt.getClaimAsString("preferred_username");
+    }
 }
 
 
