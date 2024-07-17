@@ -2,15 +2,3 @@ logging:
   level:
     root: INFO
     org.springframework.cloud.vault: DEBUG
-spring:
-  datasource:
-    url: jdbc:postgresql://13.209.22.119:5434/springdb_user
-    username: springuser
-    password: abcd1234
-    driver-class-name: org.postgresql.Driver
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: https://test.udongrang.com:8443/realms/next_oauth_test
-          jwk-set-uri: https://test.udongrang.com:8443/realms/next_oauth_test/protocol/openid-connect/certs
