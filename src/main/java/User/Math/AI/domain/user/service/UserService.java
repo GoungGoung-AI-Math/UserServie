@@ -5,11 +5,13 @@ import User.Math.AI.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import static User.Math.AI.domain.user.entity.Users.createUser;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class UserService {
     private final UserRepository userRepository;
 
@@ -19,4 +21,5 @@ public class UserService {
                         createUser(jwt.getClaimAsString("preferred_username")
                                 , jwt.getClaimAsString("name")));
     }
+
 }
