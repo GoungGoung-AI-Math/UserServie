@@ -30,7 +30,7 @@ public class UserProfile {
     @OneToMany(mappedBy = "userProfile")
     private List<Likes> likes;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private Users users;
 

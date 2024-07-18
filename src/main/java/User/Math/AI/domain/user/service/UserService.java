@@ -1,6 +1,5 @@
 package User.Math.AI.domain.user.service;
 
-import User.Math.AI.domain.user.entity.Users;
 import User.Math.AI.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.jwt.Jwt;

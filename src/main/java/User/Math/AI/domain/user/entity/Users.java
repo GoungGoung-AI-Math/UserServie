@@ -29,7 +29,7 @@ public class Users {
     @JoinColumn(name = "authority_id")
     private Authority authority;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private UserProfile userProfile;
 
     public static Users createUser(String email, String name) {
