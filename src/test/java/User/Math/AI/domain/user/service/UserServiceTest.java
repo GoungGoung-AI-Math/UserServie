@@ -87,4 +87,23 @@ class UserServiceTest {
         assertEquals(1, userCount, "There should be only one user in the database with the given email");
     }
 
+    @Test
+    void registerUserWithInvalidJwtTest() {
+        // Given
+        Jwt jwt = Jwt.withTokenValue("token")
+                .header("alg", "none")
+                .claim("some_claim", "some_value")  // 최소한의 클레임 추가
+                .build();
+
+        // When
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            userService.registerUser(jwt);
+        });
+
+        // Then
+        String expectedMessage = "JWT claim 'preferred_username' not found";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
 }
