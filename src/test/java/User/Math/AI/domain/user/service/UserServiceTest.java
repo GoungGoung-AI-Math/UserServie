@@ -50,4 +50,38 @@ class UserServiceTest {
         assertTrue(userOptional.isPresent(), "User should be present in the database");
         assertEquals(name, userOptional.get().getName(), "User name should match the provided name");
     }
+
+    @Test
+    void registerExistingUserTest() {
+        // Given
+        String email = "existinguser@example.com";
+        String name = "Existing User";
+
+        Users existingUser = Users.builder()
+                .email(email)
+                .name(name)
+                .phone("test")
+                .password("test")
+                .build();
+        userRepository.save(existingUser);
+
+        Consumer<Map<String, Object>> claims = map -> {
+            map.put("preferred_username", email);
+            map.put("name", name);
+        };
+
+        Jwt jwt = Jwt.withTokenValue("token")
+                .header("alg", "none")
+                .claims(claims)
+                .build();
+
+        // When
+        userService.registerUser(jwt);
+
+        // Then
+        Optional<Users> userOptional = userRepository.findByEmail(email);
+        assertTrue(userOptional.isPresent(), "User should be present in the database");
+        assertEquals(name, userOptional.get().getName(), "User name should match the provided name");
+        assertEquals(1, userRepository.count(), "There should be only one user in the database");
+    }
 }
