@@ -1,12 +1,9 @@
 package User.Math.AI.domain.user.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
-public class User {
+public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -18,4 +15,8 @@ public class User {
     private String password;
 
     private String phone;
+
+    @ManyToOne
+    @JoinColumn(name = "authority_id")
+    private Authority authority;
 }

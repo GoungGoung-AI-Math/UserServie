@@ -1,6 +1,6 @@
 package User.Math.AI.domain.userProfile.entity;
 
-import User.Math.AI.domain.like.entity.Like;
+import User.Math.AI.domain.like.entity.Likes;
 import User.Math.AI.domain.school.entity.School;
 import jakarta.persistence.*;
 
@@ -23,7 +23,7 @@ public class UserProfile {
     private Long solvedCount;
 
     @OneToMany(mappedBy = "userProfile")
-    private List<Like> likes;
+    private List<Likes> likes;
 
 
 }

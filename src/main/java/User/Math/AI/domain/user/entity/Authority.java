@@ -12,6 +12,6 @@ public class Authority {
 
     private String name;
 
-    @OneToMany(mappedBy = "role")
-    private List<User> users;
+    @OneToMany(mappedBy = "authority")
+    private List<Users> users;
 }
