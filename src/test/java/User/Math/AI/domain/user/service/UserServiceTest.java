@@ -82,6 +82,9 @@ class UserServiceTest {
         Optional<Users> userOptional = userRepository.findByEmail(email);
         assertTrue(userOptional.isPresent(), "User should be present in the database");
         assertEquals(name, userOptional.get().getName(), "User name should match the provided name");
-        assertEquals(1, userRepository.count(), "There should be only one user in the database");
+
+        long userCount = userRepository.count();
+        assertEquals(1, userCount, "There should be only one user in the database with the given email");
     }
+
 }
