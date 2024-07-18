@@ -2,10 +2,16 @@ package User.Math.AI.domain.school.entity;
 
 import User.Math.AI.domain.userProfile.entity.UserProfile;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class School {
 
     @Id
