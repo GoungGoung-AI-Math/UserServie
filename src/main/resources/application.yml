@@ -2,3 +2,7 @@ logging:
   level:
     root: INFO
     org.springframework.cloud.vault: DEBUG
+
+spring:
+  profiles:
+    include: local

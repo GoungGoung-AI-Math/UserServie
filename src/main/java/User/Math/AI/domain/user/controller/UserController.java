@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
@@ -16,8 +19,10 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@AuthenticationPrincipal Jwt jwt) {
+    public ResponseEntity<Map<String, String>> registerUser(@AuthenticationPrincipal Jwt jwt) {
         userService.registerUser(jwt);
-        return ResponseEntity.ok("유저 등록 성공");
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "유저 등록 성공");
+        return ResponseEntity.ok(response);
     }
 }
