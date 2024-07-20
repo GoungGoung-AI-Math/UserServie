@@ -1,0 +1,9 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://repo.spring.io/release"}
+        maven { url "https://plugins.gradle.org/m2/"}
+    }
+}
+rootProject.name = 'avro'
