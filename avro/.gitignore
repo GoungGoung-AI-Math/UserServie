@@ -16,7 +16,6 @@ build/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
-!build/libs/avro-**.jar
 
 ### IntelliJ IDEA ###
 .idea

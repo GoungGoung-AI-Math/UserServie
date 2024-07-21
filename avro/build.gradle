@@ -6,7 +6,7 @@ plugins {
     id 'com.github.davidmc24.gradle.plugin.avro-base'  version '1.0.0'
 }
 
-group = 'com.example'
+group = 'com.kafka.avroclass'
 version = '0.1.1'
 
 java {
