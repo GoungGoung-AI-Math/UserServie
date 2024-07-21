@@ -18,10 +18,10 @@ services:
       #      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic restaurant-approval-response --delete --if-exists
       #      추우에 원하는 토픽을 만들기
             echo -e 'Creating kafka topics'
-            kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic attempt-analysis-request --replication-factor 3 --partitions 3
-            kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic attempt-analysis-response --replication-factor 3 --partitions 3
-      #      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic restaurant-approval-request --replication-factor 3 --partitions 3
-      #      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic restaurant-approval-response --replication-factor 3 --partitions 3
+            kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic attempt-analysis-request --replication-factor 2 --partitions 2
+            kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic attempt-analysis-response --replication-factor 2 --partitions 2
+      #      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic restaurant-approval-request --replication-factor 2 --partitions 2
+      #      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic restaurant-approval-response --replication-factor 2 --partitions 2
 
 
       echo -e 'Successfully created the following topics:'
