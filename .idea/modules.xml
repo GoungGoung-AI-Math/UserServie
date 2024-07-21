@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/avro/avro.iml" filepath="$PROJECT_DIR$/avro/avro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/avro.main.iml" filepath="$PROJECT_DIR$/.idea/modules/avro.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/avro.test.iml" filepath="$PROJECT_DIR$/.idea/modules/avro.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/kafkaInfra.iml" filepath="$PROJECT_DIR$/.idea/kafkaInfra.iml" />
     </modules>
   </component>
