@@ -32,9 +32,13 @@
 
 - KafkaInfra를 모든 레포지토리에서 subtree로 등록
     - `git remote add kafkaInfra https://github.com/GoungGoung-AI-Math/KafkaInfra.git`
-    - `git subtree add --prefix my-kafka-infra kafkaInfra main `
-
+    - `git subtree add --prefix src/main/java/com/example/demo/my/kafka/infra kafkaInfra main`
 - Avro 파일 수정
     - `gradle build generateAvro` 실행
     - 커밋 및 배포
     - 다른 레포지토리는 풀 받아서 사용
+- 루트에서 수정하고 푸쉬하는 경우, ex) Problem에서 서브프로젝트 수정 및 푸쉬
+  - `git 커밋한 후`
+  - `git subtree push --prefix src/main/java/com/example/demo/my/kafka/infra kafkaInfra main`
+- 서브에서 수정하고 푸쉬하는 경우 ex) Problem에서 서브 프로젝트 풀
+  - `git subtree pull --prefix src/main/java/com/example/demo/my/kafka/infra kafkaInfra main`
