@@ -7,10 +7,12 @@
 - 브로커 개수 2개 확인
 
 
-## 카프카 클러스터 구축 all in one
+## [미완] 카프카 클러스터 구축 all in one
 
 1. sh 파일 실행, 내부적으로 step by step 과정을 수행
 `sh docker-compose/infra-up.sh `
+2. `init-kafka`와 `kafka-manager` 를 재실행해야 정상작동하는데 왜 그런지 모르겠습니다... 일단 step by step 하는게 안전함.
+
 
 ## 카프카 클러스터 구축 step by step 
 
@@ -25,6 +27,7 @@
 3. kafka 실행하기
 
 `docker-compose -f docker-compose/common.yml -f docker-compose/kafka_cluster.yml up -d`
+`docker ps -a | grep kafka-broker-1` 브로커 생성 체크!
 
 4. kafka에 토픽 생성하기 - 처음 세팅할 때만 하면 된다.
 
