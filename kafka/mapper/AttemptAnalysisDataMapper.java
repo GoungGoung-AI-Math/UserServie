@@ -38,6 +38,16 @@ public class AttemptAnalysisDataMapper {
                 .build();
     }
 
+    public AttemptAnalysisRequestDto avroModelToAttemptAnalysisRequestDto(AttemptAnalysisRequestAvroModel avroModel){
+        return AttemptAnalysisRequestDto.builder()
+                .attemptId(avroModel.getAttemptId())
+                .analysisType(com.example.demo.my.kafka.infra.kafka.dtos.AnalysisType.valueOf(avroModel.getAnalysisType().name()))
+                .messageType(
+                        com.example.demo.my.kafka.infra.kafka.dtos.MessageType.valueOf(avroModel.getMessageType().name()))
+                .content(avroModel.getContent())
+                .build();
+    }
+
     public AttemptAnalysisResponseDto avroModelToAttemptAnalysisResponseDto(AttemptAnalysisResponseAvroModel avroModel){
         return AttemptAnalysisResponseDto.builder()
                 .attemptId(avroModel.getAttemptId())
