@@ -11,19 +11,23 @@
         "symbols": ["ATTEMPT", "QUESTION"]
       }
     },
-    {"name": "messageType",
-      "type": {
-        "type": "enum",
-        "name": "MessageType",
-        "symbols": ["TEXT", "IMAGE_URL"]
-      }
-    },
     {
-      "name": "content",
+      "name": "contents",
       "type": {
         "type": "array",
         "items":{
-          "type":"string"
+          "name":"Content",
+          "type":"record",
+          "fields":[
+            {"name":"content", "type": "string"},
+            {"name": "messageType",
+              "type": {
+                "type": "enum",
+                "name": "MessageType",
+                "symbols": ["TEXT", "IMAGE_URL"]
+              }
+            }
+          ]
         }
       }
     }
