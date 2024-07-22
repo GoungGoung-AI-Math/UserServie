@@ -20,12 +20,7 @@
     },
     {
       "name": "content",
-      "type": {
-        "type": "array",
-        "items":{
-          "type":"string"
-        }
-      }
+      "type": "string"
     }
   ]
 }
