@@ -1,6 +1,6 @@
-package com.example.demo.my.kafka.infra.kafka.producer;
+package User.Math.AI.my.kafka.infra.kafka.producer;
 
-import com.example.demo.my.kafka.infra.kafka.producer.exception.KafkaProducerException;
+import User.Math.AI.my.kafka.infra.kafka.producer.exception.KafkaProducerException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.producer.RecordMetadata;
