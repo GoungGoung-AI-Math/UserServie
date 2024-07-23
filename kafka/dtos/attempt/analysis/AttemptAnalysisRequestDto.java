@@ -1,7 +1,7 @@
-package com.example.demo.my.kafka.infra.kafka.dtos.attempt.analysis;
+package User.Math.AI.my.kafka.infra.kafka.dtos.attempt.analysis;
 
-import com.example.demo.my.kafka.infra.kafka.dtos.MessageType;
-import com.example.demo.my.kafka.infra.kafka.dtos.AnalysisType;
+import User.Math.AI.my.kafka.infra.kafka.dtos.MessageType;
+import User.Math.AI.my.kafka.infra.kafka.dtos.AnalysisType;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
