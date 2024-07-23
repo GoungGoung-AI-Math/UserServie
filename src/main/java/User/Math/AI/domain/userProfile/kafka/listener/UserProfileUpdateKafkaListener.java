@@ -1,7 +1,7 @@
 package User.Math.AI.domain.userProfile.kafka.listener;
 
 import User.Math.AI.domain.userProfile.dto.request.UserUpdateMessage;
-import User.Math.AI.domain.user.service.UserService;
+import User.Math.AI.domain.userProfile.service.UserProfileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -15,8 +15,8 @@ import java.util.List;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class UserUpdateKafkaListener {
-    private final UserService userService;
+public class UserProfileUpdateKafkaListener {
+    private final UserProfileService userProfileService;
 
     @KafkaListener(id = "${kafka-consumer.user-update-consumer-group-id}", topics = "${problem-service.user-update-topic-name}")
     public void receive(@Payload List<UserUpdateMessage> messages,
@@ -32,7 +32,7 @@ public class UserUpdateKafkaListener {
         messages.forEach(message -> {
             log.info("Processing user update for user id: {} problem id: {} status: {}",
                     message.getUserId(), message.getProblemId(), message.getStatus());
-            userService.updateUserStatus(message.getUserId(), message.getProblemId(), message.getStatus());
+            userProfileService.attemptAfterUpdateUserData(message.getUserId(), message.getProblemId(), message.getStatus());
         });
     }
 }
