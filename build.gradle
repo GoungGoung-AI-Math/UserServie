@@ -88,13 +88,13 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-sourceSets {
-	test {
-		java {
-			srcDirs = ['src/test/java']
-		}
-	}
-}
+//sourceSets {
+//	test {
+//		java {
+//			srcDirs = ['src/test/java']
+//		}
+//	}
+//}
 
 // avro build
 def generateAvro = tasks.register("generateAvro", com.github.davidmc24.gradle.plugin.avro.GenerateAvroJavaTask) {
