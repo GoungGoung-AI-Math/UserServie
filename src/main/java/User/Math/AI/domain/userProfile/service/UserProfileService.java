@@ -53,4 +53,14 @@ public class UserProfileService {
         userProfile.addSolvedProblem(event.getProblemId());
         userProfileRepository.save(userProfile);
     }
+
+    public void updateUserProfileQuestion(com.example.demo.avro.UserProfileQuestionUpdateEvent event) {
+        Users user = userRepository.findById(event.getUserId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        UserProfile userProfile = userProfileRepository.findById(user.getId())
+                .orElseThrow(() -> new EntityNotFoundException("프로필 못찾음"));
+        userProfile.addQuestion(event.getQuestionId());
+        userProfileRepository.save(userProfile);
+    }
 }

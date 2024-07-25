@@ -17,4 +17,10 @@ public class UserUpdateEventConsumer {
         log.info("Received UserUpdateEvent.avsc: {}", event);
         userProfileService.updateUserStatus(event);
     }
+
+    @KafkaListener(topics = "user-update-topic", groupId = "user-update-group")
+    public void consume(com.example.demo.avro.UserProfileQuestionUpdateEvent event) {
+        log.info("Received UserUpdateQuestion.avsc: {}", event);
+        userProfileService.updateUserProfileQuestion(event);
+    }
 }
