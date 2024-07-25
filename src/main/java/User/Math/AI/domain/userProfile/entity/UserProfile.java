@@ -33,6 +33,9 @@ public class UserProfile {
     @ElementCollection
     private List<Long> solvedProblems;
 
+    @ElementCollection
+    private List<Long> questions;
+
     @OneToMany(mappedBy = "userProfile")
     private List<Likes> likes;
 
@@ -53,5 +56,9 @@ public class UserProfile {
     public void addSolvedProblem(Long problemId) {
         this.solvedProblems.add(problemId);
         this.solvedCount = (long) this.solvedProblems.size();
+    }
+
+    public void addQuestion(Long questionId) {
+        this.questions.add(questionId);
     }
 }
