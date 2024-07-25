@@ -5,6 +5,7 @@ import User.Math.AI.domain.school.repository.SchoolRepository;
 import User.Math.AI.domain.user.entity.Users;
 import User.Math.AI.domain.user.repository.UserRepository;
 import User.Math.AI.domain.userProfile.dto.request.AddInfoUserProfileRequest;
+import User.Math.AI.domain.userProfile.dto.response.UserProfileResponse;
 import User.Math.AI.domain.userProfile.entity.UserProfile;
 import User.Math.AI.domain.userProfile.repository.UserProfileRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -62,5 +63,9 @@ public class UserProfileService {
                 .orElseThrow(() -> new EntityNotFoundException("프로필 못찾음"));
         userProfile.addQuestion(event.getQuestionId());
         userProfileRepository.save(userProfile);
+    }
+
+    public UserProfileResponse getUserProfile(Long userId) {
+        return userProfileRepository.getUserProfile(userId);
     }
 }

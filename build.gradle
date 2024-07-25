@@ -59,6 +59,11 @@ dependencies {
 	//kafka
 	implementation 'org.springframework.kafka:spring-kafka'
 
+	//querydsl
+	annotationProcessor 'jakarta.persistence:jakarta.persistence-api:3.1.0'
+	annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jakarta'
+	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+
 	// Avro
 	implementation group: 'org.apache.avro', name: 'avro', version: '1.11.3'
 	implementation group: 'io.confluent', name: 'kafka-avro-serializer', version: '7.0.1'
@@ -83,13 +88,13 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-sourceSets {
-	test {
-		java {
-			srcDirs = ['src/test/java']
-		}
-	}
-}
+//sourceSets {
+//	test {
+//		java {
+//			srcDirs = ['src/test/java']
+//		}
+//	}
+//}
 
 // avro build
 def generateAvro = tasks.register("generateAvro", com.github.davidmc24.gradle.plugin.avro.GenerateAvroJavaTask) {

@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Builder
 @Getter
@@ -24,6 +26,8 @@ public class Users {
     private String password;
 
     private String phone;
+
+    private LocalDateTime createAt;
 
     @ManyToOne
     @JoinColumn(name = "authority_id")
