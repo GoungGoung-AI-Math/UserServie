@@ -36,6 +36,9 @@ public class UserProfile {
     @ElementCollection
     private List<Long> questions;
 
+    @ElementCollection
+    private List<Long> answers;
+
     @OneToMany(mappedBy = "userProfile")
     private List<Likes> likes;
 

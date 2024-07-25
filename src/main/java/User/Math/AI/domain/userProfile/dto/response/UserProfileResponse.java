@@ -14,7 +14,7 @@ public class UserProfileResponse {
     // 레이팅
     // 제출 수
     // 푼 문제 수 (userProfile, solvedCount.count) (맞은 문제)
-    // 질문 개수
-    // 답변 개수
-    // 받은 좋아요 수
+    // 질문 개수   questions.count
+    // 답변 개수   answers.count
+    // 받은 좋아요 수 likes.count
 }
