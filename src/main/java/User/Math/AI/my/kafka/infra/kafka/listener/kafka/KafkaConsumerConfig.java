@@ -44,6 +44,7 @@ public class KafkaConsumerConfig<K extends Serializable, V extends SpecificRecor
                 kafkaConsumerConfigData.getMaxPartitionFetchBytesDefault() *
                         kafkaConsumerConfigData.getMaxPartitionFetchBytesBoostFactor());
         props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, kafkaConsumerConfigData.getMaxPollRecords());
+        props.put("specific.avro.reader", true);
         return props;
     }
 

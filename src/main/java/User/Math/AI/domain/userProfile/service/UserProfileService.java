@@ -9,10 +9,14 @@ import User.Math.AI.domain.userProfile.entity.UserProfile;
 import User.Math.AI.domain.userProfile.repository.UserProfileRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class UserProfileService {
     private final UserProfileRepository userProfileRepository;
     private final UserRepository userRepository;
@@ -28,6 +32,25 @@ public class UserProfileService {
         UserProfile userProfile = UserProfile
                 .createUserProfile(targetUser, school, addInfoUserProfileRequest.getNickName());
 
+        userProfileRepository.save(userProfile);
+    }
+
+    public void attemptAfterUpdateUserData(Long userId, Long problemId, String status) {
+        UserProfile target = userProfileRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("유저를 찾을 수 없음 userId: " + userId)).getUsers().getUserProfile();
+
+        target.addSolvedProblem(problemId);
+        userProfileRepository.save(target);
+    }
+
+    public void updateUserStatus(com.example.demo.avro.UserUpdateEvent event) {
+        Users user = userRepository.findById(event.getUserId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // 유저 상태 업데이트 로직
+        UserProfile userProfile = userProfileRepository.findById(user.getId())
+                .orElseThrow(() -> new EntityNotFoundException("프로필 못찾음"));
+        userProfile.addSolvedProblem(event.getProblemId());
         userProfileRepository.save(userProfile);
     }
 }

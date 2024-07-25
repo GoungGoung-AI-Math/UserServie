@@ -9,6 +9,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,6 +30,9 @@ public class UserProfile {
 
     private Long solvedCount;
 
+    @ElementCollection
+    private List<Long> solvedProblems;
+
     @OneToMany(mappedBy = "userProfile")
     private List<Likes> likes;
 
@@ -42,6 +46,12 @@ public class UserProfile {
                 .school(school)
                 .solvedCount(0L)
                 .users(user)
+                .solvedProblems(new ArrayList<>())
                 .build();
+    }
+
+    public void addSolvedProblem(Long problemId) {
+        this.solvedProblems.add(problemId);
+        this.solvedCount = (long) this.solvedProblems.size();
     }
 }
