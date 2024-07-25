@@ -9,9 +9,11 @@ import User.Math.AI.domain.userProfile.entity.UserProfile;
 import User.Math.AI.domain.userProfile.repository.UserProfileRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -39,5 +41,13 @@ public class UserProfileService {
 
         target.addSolvedProblem(problemId);
         userProfileRepository.save(target);
+    }
+
+    public void updateUserStatus(com.example.demo.avro.UserUpdateEvent event) {
+        Users user = userRepository.findById(event.getUserId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // 유저 상태 업데이트 로직
+        log.info("################{}##########{}", user.getUserProfile());
     }
 }

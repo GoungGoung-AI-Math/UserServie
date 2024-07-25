@@ -13,4 +13,5 @@ public class KafkaConfigData {
     private String schemaRegistryUrl;
     private Integer numOfPartitions;
     private Short replicationFactor;
+    private String userUpdateTopicName;
 }
