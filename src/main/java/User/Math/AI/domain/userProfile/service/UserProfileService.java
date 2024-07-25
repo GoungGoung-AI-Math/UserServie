@@ -48,6 +48,9 @@ public class UserProfileService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         // 유저 상태 업데이트 로직
-        log.info("################{}##########{}", user.getUserProfile());
+        UserProfile userProfile = userProfileRepository.findById(user.getId())
+                .orElseThrow(() -> new EntityNotFoundException("프로필 못찾음"));
+        userProfile.addSolvedProblem(event.getProblemId());
+        userProfileRepository.save(userProfile);
     }
 }
