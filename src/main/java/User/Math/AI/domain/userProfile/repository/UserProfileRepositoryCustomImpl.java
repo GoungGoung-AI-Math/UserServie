@@ -23,10 +23,10 @@ public class UserProfileRepositoryCustomImpl implements UserProfileRepositoryCus
                         userProfile.users.createAt,
                         userProfile.tier,
                         userProfile.rating,
-                        userProfile.solvedProblems.size(),
-                        userProfile.questions.size(),
-                        userProfile.answers.size(),
-                        userProfile.likes.size()))
+                        userProfile.solvedProblems.size().longValue(),
+                        userProfile.questions.size().longValue(),
+                        userProfile.answers.size().longValue(),
+                        userProfile.likes.size().longValue()))
                 .from(userProfile)
                 .where(userProfile.users.id.eq(userId))
                 .fetchOne();
