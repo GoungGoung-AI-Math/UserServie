@@ -32,9 +32,9 @@ public class UserProfileController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/get-profile")
-    public ResponseEntity<UserProfileResponse> getUserProfile(@AuthenticationPrincipal Jwt jwt) {
+    @GetMapping("/get-profile/{userId}")
+    public ResponseEntity<UserProfileResponse> getUserProfile(@AuthenticationPrincipal Jwt jwt, @PathVariable Long userId) {
         return ResponseEntity.ok(
-                userProfileService.getUserProfile(Long.valueOf(jwt.getId())));
+                userProfileService.getUserProfile(userId));
     }
 }
