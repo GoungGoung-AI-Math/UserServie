@@ -34,6 +34,7 @@ services:
       - "./volumes/kafka/broker-1:/var/lib/kafka/data"
     networks:
       - ${GLOBAL_NETWORK:-kafka}
+    user: "0"  # root 사용자로 실행
   kafka-broker-2:
     image: confluentinc/cp-kafka:${KAFKA_VERSION}
     hostname: kafka-broker-2
@@ -51,6 +52,7 @@ services:
       - "./volumes/kafka/broker-2:/var/lib/kafka/data"
     networks:
       - ${GLOBAL_NETWORK:-kafka}
+    user: "0"  # root 사용자로 실행
   kafka-manager:
     image: hlebalbau/kafka-manager:stable
     restart: always

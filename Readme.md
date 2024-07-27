@@ -7,6 +7,15 @@
 - 브로커 개수 2개 확인
 
 
+## 카프카 클러스터 ec2로 배포하기
+
+1. ec2 만들기 `ec2-user-data.sh`를 첨부해서!
+    `aws ec2 run-instances --image-id ami-045f2d6eeb07ce8c0 --count 1 --instance-type t3.medium --key-name ec2-cluster-key --security-group-ids sg-02f510bbcb0a6983c --subnet-id subnet-05a157c8cae97b9a8 --user-data file://kafka-cluster-user-data.sh --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=my-kafka-cluster}]'`
+2. 생성한 ec2 공공 ip 주소 찾기
+    `aws ec2 describe-instances --filters "Name=instance-state-name,Values=running" "Name=tag-value,Values=my-kafka-cluster" --query "Reservations[*].Instances[*].PublicDnsName" --output text`
+3. ec2에 컨테이너 배포하기
+    `sh infra-deploy.sh`
+
 ## [미완] 카프카 클러스터 구축 all in one
 
 1. sh 파일 실행, 내부적으로 step by step 과정을 수행
