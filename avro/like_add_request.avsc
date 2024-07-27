@@ -1,0 +1,18 @@
+{
+  "namespace": "com.example.demo.my.kafka.infra.avrobuild",
+  "type": "record",
+  "name": "LikeAddRequestAvroModel",
+  "fields": [
+    {"name": "likeId", "type": "long"},
+    {"name": "giverId", "type": "long"},
+    {"name": "receiverId", "type": "long"},
+    {"name": "domainId", "type": "long"},
+    {"name": "domainType",
+      "type": {
+        "type": "enum",
+        "name": "DomainType",
+        "symbols": ["PROBLEM", "SOLUTION", "ATTEMPT", "REVIEW", "QUESTION", "ANSWER"]
+      }
+    }
+  ]
+}
