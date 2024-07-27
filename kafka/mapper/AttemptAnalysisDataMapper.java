@@ -1,7 +1,6 @@
 package com.example.demo.my.kafka.infra.kafka.mapper;
 
 
-import com.example.demo.my.kafka.infra.avrobuild.*;
 import com.example.demo.my.kafka.infra.avrobuild.AnalysisType;
 import com.example.demo.my.kafka.infra.avrobuild.AttemptAnalysisRequestAvroModel;
 import com.example.demo.my.kafka.infra.avrobuild.AttemptAnalysisResponseAvroModel;
