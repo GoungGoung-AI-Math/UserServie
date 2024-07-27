@@ -3,7 +3,6 @@
   "type": "record",
   "name": "LikeAddRequestAvroModel",
   "fields": [
-    {"name": "likeId", "type": "long"},
     {"name": "giverId", "type": "long"},
     {"name": "receiverId", "type": "long"},
     {"name": "domainId", "type": "long"},
