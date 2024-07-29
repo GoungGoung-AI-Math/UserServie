@@ -3,3 +3,4 @@
 avrobuild/**
 docker-compose/volumes/**
 /avrobuild/**
+/avrobuild/
