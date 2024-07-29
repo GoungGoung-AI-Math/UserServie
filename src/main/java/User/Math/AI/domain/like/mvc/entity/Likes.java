@@ -1,4 +1,4 @@
-package User.Math.AI.domain.like.entity;
+package User.Math.AI.domain.like.mvc.entity;
 
 import User.Math.AI.domain.userProfile.entity.UserProfile;
 import jakarta.persistence.*;
