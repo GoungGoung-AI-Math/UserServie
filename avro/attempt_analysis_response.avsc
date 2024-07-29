@@ -1,5 +1,5 @@
 {
-  "namespace": "User.Math.AI.my.kafka.infra.avrobuild",
+  "namespace": "Math.AI.my.kafka.infra.avrobuild",
   "type": "record",
   "name": "AttemptAnalysisResponseAvroModel",
   "fields": [
