@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import math.ai.my.kafka.infra.avrobuild.LikeAddRequestAvroModel;
 import math.ai.my.kafka.infra.kafka.dtos.RelationType;
-import math.ai.my.kafka.infra.kafka.listener.kafka.KafkaConsumer;
+import math.ai.my.kafka.infra.kafka.listener.KafkaConsumer;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
