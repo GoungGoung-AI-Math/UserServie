@@ -2,3 +2,4 @@
 .idea/**
 avrobuild/**
 docker-compose/volumes/**
+/avrobuild/**
