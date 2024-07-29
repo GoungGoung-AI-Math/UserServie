@@ -10,4 +10,5 @@ import org.springframework.context.annotation.Configuration;
 public class ProblemServiceKafkaConfigData {
     private String AttemptAnalysisRequestTopicName;
     private String AttemptAnalysisResponseTopicName;
+    private String LikeAddRequestTopicName;
 }

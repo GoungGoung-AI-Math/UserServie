@@ -1,0 +1,10 @@
+{
+  "type": "record",
+  "name": "UserUpdateEvent",
+  "namespace": "com.example.demo.avro",
+  "fields": [
+    {"name": "userId", "type": "long"},
+    {"name": "problemId", "type": "long"},
+    {"name": "status", "type": "string"}
+  ]
+}
