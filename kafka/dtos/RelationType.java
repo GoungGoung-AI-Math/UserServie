@@ -2,7 +2,7 @@ package com.example.demo.my.kafka.infra.kafka.dtos;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
-public enum DomainType {
+public enum RelationType {
     PROBLEM("problem"),
     SOLUTION("solution"),
     ATTEMPT("attempt"),
@@ -11,7 +11,7 @@ public enum DomainType {
     ANSWER("answer");
 
     private final String type;
-    DomainType(String type){
+    RelationType(String type){
         this.type = type;
     }
 

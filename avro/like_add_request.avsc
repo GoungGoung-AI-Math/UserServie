@@ -5,11 +5,11 @@
   "fields": [
     {"name": "giverId", "type": "long"},
     {"name": "receiverId", "type": "long"},
-    {"name": "domainId", "type": "long"},
-    {"name": "domainType",
+    {"name": "relationId", "type": "long"},
+    {"name": "relationType",
       "type": {
         "type": "enum",
-        "name": "DomainType",
+        "name": "RelationType",
         "symbols": ["PROBLEM", "SOLUTION", "ATTEMPT", "REVIEW", "QUESTION", "ANSWER"]
       }
     }
