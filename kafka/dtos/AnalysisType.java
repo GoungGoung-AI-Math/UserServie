@@ -1,4 +1,4 @@
-package User.Math.AI.my.kafka.infra.kafka.dtos;
+package Math.AI.my.kafka.infra.kafka.dtos;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 

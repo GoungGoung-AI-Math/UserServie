@@ -1,5 +1,4 @@
-package com.example.demo.my.kafka.infra.kafka.dtos;
-
+package Math.AI.my.kafka.infra.kafka.dtos;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum RelationType {
