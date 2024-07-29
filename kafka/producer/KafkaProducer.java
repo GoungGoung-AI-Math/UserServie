@@ -1,4 +1,4 @@
-package Math.AI.my.kafka.infra.kafka.producer;
+package math.ai.my.kafka.infra.kafka.producer;
 
 import org.apache.avro.specific.SpecificRecordBase;
 import org.springframework.kafka.support.SendResult;

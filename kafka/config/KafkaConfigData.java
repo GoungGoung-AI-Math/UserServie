@@ -1,4 +1,4 @@
-package Math.AI.my.kafka.infra.kafka.config;
+package math.ai.my.kafka.infra.kafka.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

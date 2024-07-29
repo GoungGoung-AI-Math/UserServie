@@ -1,7 +1,7 @@
 {
   "type": "record",
   "name": "UserProfileQuestionUpdateEvent",
-  "namespace": "Math.AI.my.kafka.infra.avrobuild",
+  "namespace": "math.ai.my.kafka.infra.avrobuild",
   "fields": [
     {"name": "userId", "type": "long"},
     {"name": "questionId", "type": "long"},

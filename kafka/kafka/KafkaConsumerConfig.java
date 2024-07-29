@@ -1,7 +1,7 @@
-package Math.AI.my.kafka.infra.kafka.listener.kafka;
+package math.ai.my.kafka.infra.kafka.listener.kafka;
 
-import Math.AI.my.kafka.infra.kafka.config.KafkaConfigData;
-import Math.AI.my.kafka.infra.kafka.config.KafkaConsumerConfigData;
+import math.ai.my.kafka.infra.kafka.config.KafkaConfigData;
+import math.ai.my.kafka.infra.kafka.config.KafkaConsumerConfigData;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.springframework.context.annotation.Bean;
