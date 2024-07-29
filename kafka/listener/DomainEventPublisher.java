@@ -1,4 +1,4 @@
-package math.ai.my.kafka.infra.kafka.publisher.kafka;
+package math.ai.my.kafka.infra.kafka.listener;
 
 public interface DomainEventPublisher<T extends DomainEvent> {
 
