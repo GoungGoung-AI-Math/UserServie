@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "name": "NicknameListAvro",
+  "namespace": "com.example.demo.avro",
+  "fields": [
+    {
+      "name": "nicknames",
+      "type": "string"
+    },
+    {
+      "name": "requestId",
+      "type": "string"
+    }
+  ]
+}

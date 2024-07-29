@@ -5,6 +5,8 @@
   "fields": [
     {"name": "userId", "type": "long"},
     {"name": "problemId", "type": "long"},
-    {"name": "status", "type": "string"}
+    {"name": "status", "type": "string"},
+    {"name": "nickname", "type": ["null", "string"], "default": null},
+    {"name": "profileImageUrl", "type": ["null", "string"], "default": null}
   ]
 }

@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "name": "UserIdListAvro",
+  "namespace": "com.example.demo.avro",
+  "fields": [
+    {
+      "name": "userIds",
+      "type": "string"
+    },
+    {
+      "name": "requestId",
+      "type": "string"
+    }
+  ]
+}
