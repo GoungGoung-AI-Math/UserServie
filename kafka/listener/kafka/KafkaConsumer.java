@@ -1,4 +1,4 @@
-package User.Math.AI.my.kafka.infra.kafka.listener.kafka;
+package Math.AI.my.kafka.infra.kafka.listener.kafka;
 
 import org.apache.avro.specific.SpecificRecordBase;
 
