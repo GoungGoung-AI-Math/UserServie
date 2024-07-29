@@ -1,4 +1,4 @@
-package User.Math.AI.my.kafka.infra.kafka.producer;
+package Math.AI.my.kafka.infra.kafka.producer;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.RecordMetadata;

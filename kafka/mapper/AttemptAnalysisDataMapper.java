@@ -1,14 +1,14 @@
-package User.Math.AI.my.kafka.infra.kafka.mapper;
+package Math.AI.my.kafka.infra.kafka.mapper;
 
 
-import User.Math.AI.my.kafka.infra.avrobuild.*;
-import User.Math.AI.my.kafka.infra.avrobuild.AnalysisType;
-import User.Math.AI.my.kafka.infra.avrobuild.AttemptAnalysisRequestAvroModel;
-import User.Math.AI.my.kafka.infra.avrobuild.AttemptAnalysisResponseAvroModel;
-import User.Math.AI.my.kafka.infra.avrobuild.MessageType;
-import User.Math.AI.my.kafka.infra.kafka.dtos.attempt.analysis.AttemptAnalysisRequestDto;
-import User.Math.AI.my.kafka.infra.kafka.dtos.attempt.analysis.AttemptAnalysisResponseDto;
-import User.Math.AI.my.kafka.infra.kafka.dtos.attempt.analysis.ContentDto;
+import Math.AI.my.kafka.infra.avrobuild.*;
+import Math.AI.my.kafka.infra.avrobuild.AnalysisType;
+import Math.AI.my.kafka.infra.avrobuild.AttemptAnalysisRequestAvroModel;
+import Math.AI.my.kafka.infra.avrobuild.AttemptAnalysisResponseAvroModel;
+import Math.AI.my.kafka.infra.avrobuild.MessageType;
+import Math.AI.my.kafka.infra.kafka.dtos.attempt.analysis.AttemptAnalysisRequestDto;
+import Math.AI.my.kafka.infra.kafka.dtos.attempt.analysis.AttemptAnalysisResponseDto;
+import Math.AI.my.kafka.infra.kafka.dtos.attempt.analysis.ContentDto;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;

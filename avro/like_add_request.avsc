@@ -1,4 +1,5 @@
 {
+  "namespace": "Math.AI.my.kafka.infra.avrobuild",
   "type": "record",
   "name": "LikeAddRequestAvroModel",
   "fields": [
