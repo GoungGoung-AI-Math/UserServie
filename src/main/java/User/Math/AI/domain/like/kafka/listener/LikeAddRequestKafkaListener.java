@@ -4,10 +4,11 @@ package User.Math.AI.domain.like.kafka.listener;
 import User.Math.AI.domain.like.mvc.dto.LikeAddRequest;
 import User.Math.AI.domain.like.mvc.service.LikeService;
 
-import User.Math.AI.my.kafka.infra.avrobuild.LikeAddRequestAvroModel;
-import User.Math.AI.my.kafka.infra.kafka.listener.kafka.KafkaConsumer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import math.ai.my.kafka.infra.avrobuild.LikeAddRequestAvroModel;
+import math.ai.my.kafka.infra.kafka.dtos.RelationType;
+import math.ai.my.kafka.infra.kafka.listener.kafka.KafkaConsumer;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
@@ -39,7 +40,7 @@ public class LikeAddRequestKafkaListener implements KafkaConsumer<LikeAddRequest
             LikeAddRequest request = LikeAddRequest.builder()
                     .receiverId(avroModel.getReceiverId())
                     .giverId(avroModel.getGiverId())
-                    .type(com.example.demo.my.kafka.infra.kafka.dtos.RelationType.valueOf(avroModel.getRelationType().name()))
+                    .type(RelationType.valueOf(avroModel.getRelationType().name()))
                     .build();
             log.info("Processing successful like for receiver id: {} type : {}", request.getReceiverId(), request.getType());
             likeService.likeAddForUser(request);

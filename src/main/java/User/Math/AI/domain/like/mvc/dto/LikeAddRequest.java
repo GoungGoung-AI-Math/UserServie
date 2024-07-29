@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import math.ai.my.kafka.infra.kafka.dtos.RelationType;
 
 @Getter
 @NoArgsConstructor
@@ -15,6 +16,6 @@ import lombok.NoArgsConstructor;
 public class LikeAddRequest {
     private Long giverId; // 따봉 주는 사람
     private Long receiverId; // 따봉 받는 사람, 글쓴이
-    private com.example.demo.my.kafka.infra.kafka.dtos.RelationType type;
+    private RelationType type;
     private Long relationId;
 }
