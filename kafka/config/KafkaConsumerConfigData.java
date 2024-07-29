@@ -11,6 +11,7 @@ public class KafkaConsumerConfigData {
     private String keyDeserializer;
     private String valueDeserializer;
     private String attemptAnalysisConsumerGroupId;
+    private String likeAddConsumerGroupId;
     private String autoOffsetReset;
     private String specificAvroReaderKey;
     private String specificAvroReader;
