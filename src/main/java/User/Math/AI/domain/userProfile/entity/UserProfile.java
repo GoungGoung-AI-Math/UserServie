@@ -71,4 +71,8 @@ public class UserProfile {
     public void addQuestion(Long questionId) {
         this.questions.add(questionId);
     }
+
+    public void addActionScore(UserActionScore actionScore){
+        rating += actionScore.getPoints();
+    }
 }

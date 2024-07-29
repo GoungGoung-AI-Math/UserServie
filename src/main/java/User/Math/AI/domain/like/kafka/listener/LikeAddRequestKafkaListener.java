@@ -1,14 +1,48 @@
 package User.Math.AI.domain.like.kafka.listener;
 
 
+import User.Math.AI.domain.like.mvc.dto.LikeAddRequest;
+import User.Math.AI.domain.like.mvc.service.LikeService;
 import User.Math.AI.my.kafka.infra.avrobuild.LikeAddRequestAvroModel;
 import User.Math.AI.my.kafka.infra.kafka.listener.kafka.KafkaConsumer;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.handler.annotation.Header;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
+@RequiredArgsConstructor
+@Slf4j
 public class LikeAddRequestKafkaListener implements KafkaConsumer<LikeAddRequestAvroModel> {
+
+    private final LikeService likeService;
+
     @Override
-    public void receive(List<LikeAddRequestAvroModel> messages, List<String> keys, List<Integer> partitions, List<Long> offsets) {
+    @KafkaListener(id = "${kafka-consumer.like-add-consumer-group-id}", topics = "${user-service.like-add-request-topic-name}")
+    public void receive(@Payload List<LikeAddRequestAvroModel> messages,
+                        @Header(KafkaHeaders.RECEIVED_KEY) List<String> keys,
+                        @Header(KafkaHeaders.RECEIVED_PARTITION) List<Integer> partitions,
+                        @Header(KafkaHeaders.OFFSET) List<Long> offsets) {
+        log.info("{} number of like request received with keys:{}, partitions:{} and offsets: {}",
+                messages.size(),
+                keys.toString(),
+                partitions.toString(),
+                offsets.toString());
+
+        messages.forEach(avroModel -> {
+            LikeAddRequest request = LikeAddRequest.builder()
+                    .receiverId(avroModel.getReceiverId())
+                    .giverId(avroModel.getGiverId())
+                    .type(com.example.demo.my.kafka.infra.kafka.dtos.RelationType.valueOf(avroModel.getRelationType().name()))
+                    .build();
+            log.info("Processing successful like for receiver id: {} type : {}", request.getReceiverId(), request.getType());
+            likeService.likeAddForUser(request);
+        });
 
     }
 }
