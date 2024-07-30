@@ -1,12 +1,16 @@
 package math.ai.my.kafka.infra.kafka.dtos;
-
 import com.fasterxml.jackson.annotation.JsonValue;
 
-public enum AnalysisType {
+public enum RelationType {
+    PROBLEM("problem"),
+    SOLUTION("solution"),
     ATTEMPT("attempt"),
-    QUESTION("question");
+    REVIEW("review"),
+    QUESTION("question"),
+    ANSWER("answer");
+
     private final String type;
-    AnalysisType(String type){
+    RelationType(String type){
         this.type = type;
     }
 
@@ -14,4 +18,5 @@ public enum AnalysisType {
     public String getType(){
         return type;
     }
+
 }

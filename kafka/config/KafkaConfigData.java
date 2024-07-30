@@ -1,4 +1,4 @@
-package com.example.demo.my.kafka.infra.kafka.config;
+package math.ai.my.kafka.infra.kafka.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -13,4 +13,5 @@ public class KafkaConfigData {
     private String schemaRegistryUrl;
     private Integer numOfPartitions;
     private Short replicationFactor;
+    private String userUpdateTopicName;
 }

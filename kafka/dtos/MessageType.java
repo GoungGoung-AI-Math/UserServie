@@ -1,4 +1,4 @@
-package com.example.demo.my.kafka.infra.kafka.dtos;
+package math.ai.my.kafka.infra.kafka.dtos;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

@@ -1,4 +1,4 @@
-package com.example.demo.my.kafka.infra.kafka.config;
+package math.ai.my.kafka.infra.kafka.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Configuration;
 public class KafkaConsumerConfigData {
     private String keyDeserializer;
     private String valueDeserializer;
+    private String attemptAnalysisConsumerGroupId;
+    private String likeAddConsumerGroupId;
     private String autoOffsetReset;
     private String specificAvroReaderKey;
     private String specificAvroReader;

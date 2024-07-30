@@ -1,7 +1,8 @@
-package com.example.demo.my.kafka.infra.kafka.producer;
+package math.ai.my.kafka.infra.kafka.producer;
 
-import com.example.demo.my.kafka.infra.kafka.config.KafkaConfigData;
-import com.example.demo.my.kafka.infra.kafka.config.KafkaProducerConfigData;
+
+import math.ai.my.kafka.infra.kafka.config.KafkaConfigData;
+import math.ai.my.kafka.infra.kafka.config.KafkaProducerConfigData;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.springframework.context.annotation.Bean;

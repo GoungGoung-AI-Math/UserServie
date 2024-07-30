@@ -1,0 +1,17 @@
+{
+  "namespace": "math.ai.my.kafka.infra.avrobuild",
+  "type": "record",
+  "name": "LikeAddRequestAvroModel",
+  "fields": [
+    {"name": "giverId", "type": "long"},
+    {"name": "receiverId", "type": "long"},
+    {"name": "relationId", "type": "long"},
+    {"name": "relationType",
+      "type": {
+        "type": "enum",
+        "name": "RelationType",
+        "symbols": ["PROBLEM", "SOLUTION", "ATTEMPT", "REVIEW", "QUESTION", "ANSWER"]
+      }
+    }
+  ]
+}

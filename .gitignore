@@ -2,4 +2,5 @@
 .idea/**
 avrobuild/**
 docker-compose/volumes/**
-/docker-compose/cluster/ec2-cluster-key.pem
+/avrobuild/**
+/avrobuild/

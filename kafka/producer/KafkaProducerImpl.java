@@ -1,15 +1,14 @@
-package com.example.demo.my.kafka.infra.kafka.producer;
+package math.ai.my.kafka.infra.kafka.producer;
 
-import com.example.demo.my.kafka.infra.kafka.producer.exception.KafkaProducerException;
 import lombok.extern.slf4j.Slf4j;
+import math.ai.my.kafka.infra.kafka.producer.exception.KafkaProducerException;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.springframework.kafka.KafkaException;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
-import org.springframework.util.concurrent.ListenableFuture;
-import org.springframework.util.concurrent.ListenableFutureCallback;
+
 import javax.annotation.PreDestroy;
 import java.io.Serializable;
 import java.util.concurrent.CompletableFuture;

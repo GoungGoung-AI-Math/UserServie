@@ -1,4 +1,4 @@
-package com.example.demo.my.kafka.infra.kafka.producer.exception;
+package math.ai.my.kafka.infra.kafka.producer.exception;
 
 public class KafkaProducerException extends RuntimeException {
 
