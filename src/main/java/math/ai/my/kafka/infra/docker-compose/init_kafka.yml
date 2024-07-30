@@ -1,0 +1,32 @@
+# 브로커에 초기 토픽을 생성하는 컨테이너
+# 이미 원하는 토픽을 설정했다면 실행할 필요 없다.
+
+version: '3.7'
+services:
+  init-kafka:
+    image: confluentinc/cp-kafka:${KAFKA_VERSION}
+    entrypoint: [ '/bin/sh', '-c' ]
+    command: |
+      "
+      # block until kafka is reachable
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --list
+      
+      #      echo -e 'Deleting kafka topics'
+      #      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic payment-request --delete --if-exists
+      #      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic payment-response --delete --if-exists
+      #      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic restaurant-approval-request --delete --if-exists
+      #      kafka-topics --bootstrap-server kafka-broker-1:9092 --topic restaurant-approval-response --delete --if-exists
+      #      추우에 원하는 토픽을 만들기
+            echo -e 'Creating kafka topics'
+            kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic attempt-analysis-request --replication-factor 2 --partitions 2
+            kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic attempt-analysis-response --replication-factor 2 --partitions 2
+            kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic like-add-request --replication-factor 2 --partitions 2
+      #      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic restaurant-approval-request --replication-factor 2 --partitions 2
+      #      kafka-topics --bootstrap-server kafka-broker-1:9092 --create --if-not-exists --topic restaurant-approval-response --replication-factor 2 --partitions 2
+
+
+      echo -e 'Successfully created the following topics:'
+      kafka-topics --bootstrap-server kafka-broker-1:9092 --list
+      "
+    networks:
+      - ${GLOBAL_NETWORK:-kafka}

@@ -1,0 +1,35 @@
+{
+  "namespace": "math.ai.my.kafka.infra.avrobuild",
+  "type": "record",
+  "name": "AttemptAnalysisRequestAvroModel",
+  "fields": [
+    {"name": "attemptId", "type": "long"},
+    {"name": "analysisType",
+      "type": {
+        "type": "enum",
+        "name": "AnalysisType",
+        "symbols": ["ATTEMPT", "QUESTION"]
+      }
+    },
+    {
+      "name": "contents",
+      "type": {
+        "type": "array",
+        "items":{
+          "name":"Content",
+          "type":"record",
+          "fields":[
+            {"name":"content", "type": "string"},
+            {"name": "messageType",
+              "type": {
+                "type": "enum",
+                "name": "MessageType",
+                "symbols": ["TEXT", "IMAGE_URL"]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

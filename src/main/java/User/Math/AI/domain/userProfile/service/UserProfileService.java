@@ -11,6 +11,8 @@ import User.Math.AI.domain.userProfile.repository.UserProfileRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import math.ai.my.kafka.infra.avrobuild.UserProfileQuestionUpdateEvent;
+import math.ai.my.kafka.infra.avrobuild.UserUpdateEvent;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,7 +46,7 @@ public class UserProfileService {
         userProfileRepository.save(target);
     }
 
-    public void updateUserStatus(com.example.demo.avro.UserUpdateEvent event) {
+    public void updateUserStatus(UserUpdateEvent event) {
         Users user = userRepository.findById(event.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -55,7 +57,7 @@ public class UserProfileService {
         userProfileRepository.save(userProfile);
     }
 
-    public void updateUserProfileQuestion(com.example.demo.avro.UserProfileQuestionUpdateEvent event) {
+    public void updateUserProfileQuestion(UserProfileQuestionUpdateEvent event) {
         Users user = userRepository.findById(event.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
