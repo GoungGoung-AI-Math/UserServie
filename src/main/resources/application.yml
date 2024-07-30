@@ -16,8 +16,8 @@ spring:
     retry-count: 3
 
 kafka-config:
-  bootstrap-servers: http://localhost:19092, http://localhost:29092
-  schema-registry-url: http://localhost:8081
+  bootstrap-servers: http://3.38.213.181:19092, http://3.38.213.181:29092
+  schema-registry-url: http://3.38.213.181:8081
   schema-registry-url-key: schema.registry.url
 
 kafka-consumer:

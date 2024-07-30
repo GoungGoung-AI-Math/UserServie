@@ -1,7 +1,7 @@
 {
   "type": "record",
   "name": "UserIdListAvro",
-  "namespace": "com.example.demo.avro",
+  "namespace": "User.Math.AI.my.kafka.infra.avrobuild",
   "fields": [
     {
       "name": "userIds",
