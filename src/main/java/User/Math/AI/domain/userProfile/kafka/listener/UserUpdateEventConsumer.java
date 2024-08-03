@@ -20,7 +20,7 @@ public class UserUpdateEventConsumer {
         userProfileService.updateUserStatus(event);
     }
 
-    @KafkaListener(topics = "user-update-topic", groupId = "user-update-group")
+    @KafkaListener(topics = "user-profile-question-update-topic", groupId = "user-update-group")
     public void consume(UserProfileQuestionUpdateEvent event) {
         log.info("Received UserUpdateQuestion.avsc: {}", event);
         userProfileService.updateUserProfileQuestion(event);
