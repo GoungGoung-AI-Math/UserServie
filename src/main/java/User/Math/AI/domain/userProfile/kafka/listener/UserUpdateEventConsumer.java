@@ -2,11 +2,11 @@ package User.Math.AI.domain.userProfile.kafka.listener;
 
 import User.Math.AI.domain.userProfile.repository.UserProfileRepository;
 import User.Math.AI.domain.userProfile.service.UserProfileService;
-import User.Math.AI.my.kafka.infra.kafka.producer.KafkaProducer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import math.ai.my.kafka.infra.avrobuild.NicknameListAvro;
 import math.ai.my.kafka.infra.avrobuild.UserProfileQuestionUpdateEvent;
-import math.ai.my.kafka.infra.avrobuild.UserUpdateEvent;
+import math.ai.my.kafka.infra.kafka.producer.KafkaProducer;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class UserUpdateEventConsumer {
     private final UserProfileService userProfileService;
     private final UserProfileRepository userProfileRepository;
-    private final KafkaProducer<String, com.example.demo.avro.NicknameListAvro> kafkaProducer;
+    private final KafkaProducer<String, NicknameListAvro> kafkaProducer;
 
 
 //    @KafkaListener(topics = "user-update-topic", groupId = "user-update-group")
