@@ -7,6 +7,23 @@
 - 브로커 개수 2개 확인
 
 
+## 카프카 클러스터 ec2로 배포하기
+
+0. security group과 subnet 만들기, subnet은 public subnet이라면 상관 없음
+    ![serucity group](security_group.png)
+1. ec2 만들기 `ec2-user-data.sh`를 첨부해서!
+   - `ami-045f2d6eeb07ce8c0` 는 aws linux 2023
+   - `t3.medium` 부터 충분한 메모리 양 가짐
+   - `ec2-cluster-key` 사전에 발급한 pem key
+   - `sg-02f510bbcb0a6983c` 앞서 생성한 sg
+   - `subnet-05a157c8cae97b9a8` 앞서 생성한 subnet
+   - `aws ec2 run-instances --image-id ami-045f2d6eeb07ce8c0 --count 1 --instance-type t3.medium --key-name ec2-cluster-key --security-group-ids sg-02f510bbcb0a6983c --subnet-id subnet-05a157c8cae97b9a8 --user-data file://kafka-cluster-user-data.sh --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=my-kafka-cluster}]'`
+2. ec2에 인프라 배포하기
+   - 필요한 프로그램 설치됐는지 확인
+   - 필요한 이미지 설치
+   - docker-compose 실행
+   - `sh infra-deploy.sh`
+
 ## [미완] 카프카 클러스터 구축 all in one
 
 1. sh 파일 실행, 내부적으로 step by step 과정을 수행

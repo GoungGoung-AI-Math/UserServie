@@ -1,80 +1,83 @@
 #!/bin/bash
 
-# Define variables
-EC2_USER=ec2-user
-EC2_IP=13.209.22.119
-PEM_PATH=~/Desktop/aikey.pem
+# 변수 정의
+EC2_USER="ec2-user"
+EC2_IP="3.38.213.181"
+PEM_PATH="~/Desktop/aikey.pem"
 LOCAL_PATH=$(dirname "$0")
-REMOTE_PATH=/home/$EC2_USER/userapp
-KEYSTORE_LOCAL_PATH="/Users/makisekurisu/key1.p12"
-KEYSTORE_REMOTE_PATH="$REMOTE_PATH/key1.p12"
-TOKEN_PATH="/home/ec2-user/userapp/vault_token.txt"
+REMOTE_PATH="/home/$EC2_USER/docker_project"
+DOCKER_COMPOSE_FILE="docker-compose.yml"
+AVRO_SCHEMAS_DIR="/Users/makisekurisu/Desktop/kafka/KafkaInfra/avro"
+SCHEMA_REGISTRY_URL="http://3.38.213.181:8081"
 
-# Clean and build the project
-echo "Building the project..."
-cd $LOCAL_PATH
-./gradlew clean build
-
-# Check if build was successful
-if [ $? -ne 0 ]; then
-  echo "Build failed. Exiting..."
+# Docker Compose 파일이 현재 디렉토리에 존재하는지 확인
+if [ ! -f "$LOCAL_PATH/$DOCKER_COMPOSE_FILE" ]; then
+  echo "Error: $DOCKER_COMPOSE_FILE 파일이 현재 디렉토리에 존재하지 않습니다."
   exit 1
 fi
 
-# Create the remote directory if it doesn't exist
-ssh -i $PEM_PATH $EC2_USER@$EC2_IP "mkdir -p $REMOTE_PATH"
+# EC2 인스턴스에 연결하여 Docker 및 Docker Compose 설치
+ssh -i $PEM_PATH $EC2_USER@$EC2_IP << EOF
+# 시스템 업데이트
+sudo yum update -y
 
-# Copy files to EC2
-echo "Copying files to EC2..."
-scp -i $PEM_PATH -r $LOCAL_PATH/docker-compose.yml $LOCAL_PATH/Dockerfile $LOCAL_PATH/build/libs/Math.AI-0.0.1-SNAPSHOT.jar $KEYSTORE_LOCAL_PATH $EC2_USER@$EC2_IP:$REMOTE_PATH
+# Docker 설치
+sudo yum install -y docker
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo usermod -aG docker $EC2_USER
 
-# SSH into EC2 and run Docker Compose
-echo "Connecting to EC2 and starting Docker Compose..."
-ssh -t -i $PEM_PATH $EC2_USER@$EC2_IP << EOF
-  # Read the Vault token from the file
-  VAULT_TOKEN=\$(cat $TOKEN_PATH)
-  export VAULT_ADDR='https://test.udongrang.com:8200'
-  export VAULT_TOKEN
+# Docker Compose 설치
+DOCKER_COMPOSE_VERSION="v2.6.1"
+sudo curl -L "https://github.com/docker/compose/releases/download/\$DOCKER_COMPOSE_VERSION/docker-compose-\$(uname -s)-\$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
 
-  echo "Using Vault token: \$VAULT_TOKEN"
+# Docker 및 Docker Compose 버전 확인
+docker --version
+/usr/local/bin/docker-compose --version
 
-  # Fetch secrets using Vault CLI
-  echo "Fetching database secrets using Vault CLI..."
-  DB_SECRETS=\$(vault kv get -format=json kv/db-creds)
-  DB_USERNAME=\$(echo \$DB_SECRETS | jq -r '.data.data.username_user_db')
-  DB_PASSWORD=\$(echo \$DB_SECRETS | jq -r '.data.data.password_user_db')
-  echo "Database credentials - Username: \$DB_USERNAME, Password: \$DB_PASSWORD"
-
-  # Use existing SSL certificates
-  echo "Using existing SSL certificates..."
-
-  # Modify docker-compose.yml directly to set environment variables
-  sed -i "s/SPRING_DATASOURCE_USERNAME: springuser/SPRING_DATASOURCE_USERNAME: \$DB_USERNAME/" $REMOTE_PATH/docker-compose.yml
-  sed -i "s/SPRING_DATASOURCE_PASSWORD: password/SPRING_DATASOURCE_PASSWORD: \$DB_PASSWORD/" $REMOTE_PATH/docker-compose.yml
-
-  # Add SSL environment variables to docker-compose.yml if not already present
-  if ! grep -q "SERVER_SSL_KEY_STORE" $REMOTE_PATH/docker-compose.yml; then
-    sed -i "/SPRING_DATASOURCE_PASSWORD: \$DB_PASSWORD/a \ \ \ \ SERVER_SSL_KEY_STORE: /app/key1.p12\n \ \ \ \ SERVER_SSL_KEY_STORE_PASSWORD: abcd1234\n \ \ \ \ SERVER_SSL_KEY_STORE_TYPE: PKCS12\n \ \ \ \ SERVER_SSL_KEY_ALIAS: tomcat" $REMOTE_PATH/docker-compose.yml
-  fi
-
-  # Log the changes for verification
-  echo "Modified docker-compose.yml:"
-  grep "SPRING_DATASOURCE_USERNAME" $REMOTE_PATH/docker-compose.yml
-  grep "SPRING_DATASOURCE_PASSWORD" $REMOTE_PATH/docker-compose.yml
-  grep "SERVER_SSL_KEY_STORE" $REMOTE_PATH/docker-compose.yml
-
-  # keystore 파일 확인
-  if [ -f "$KEYSTORE_REMOTE_PATH" ]; then
-    echo "key.p12 파일이 $REMOTE_PATH 경로에 존재합니다."
-  else
-    echo "key.p12 파일이 $REMOTE_PATH 경로에 존재하지 않습니다."
-  fi
-
-  sudo systemctl start docker
-  cd $REMOTE_PATH
-  sudo docker-compose -f docker-compose.yml down
-  sudo docker-compose build --no-cache
-  sudo docker-compose up -d
+# 프로젝트 디렉토리 생성
+mkdir -p $REMOTE_PATH
 EOF
 
-echo "Deployment to EC2 complete!"
+# Docker Compose 파일을 EC2 인스턴스로 업로드
+scp -i $PEM_PATH $LOCAL_PATH/$DOCKER_COMPOSE_FILE $EC2_USER@$EC2_IP:$REMOTE_PATH/
+
+# EC2 인스턴스에 연결하여 Docker Compose를 사용하여 서비스를 시작
+ssh -i $PEM_PATH $EC2_USER@$EC2_IP << EOF
+cd $REMOTE_PATH
+sudo docker-compose build --no-cache
+sudo docker-compose up -d
+EOF
+
+echo "Docker Compose 서비스가 EC2 인스턴스에서 시작되었습니다."
+
+# Schema Registry에 스키마 등록 함수 정의
+register_schema() {
+  schema_file=$1
+  subject_name=$(basename "$schema_file" .avsc)
+
+  # 스키마가 이미 등록되어 있는지 확인
+  if curl -s -o /dev/null -w "%{http_code}" "$SCHEMA_REGISTRY_URL/subjects/$subject_name-value/versions/latest" | grep -q "200"; then
+    echo "Schema for subject $subject_name already exists. Skipping..."
+  else
+    # 스키마 등록
+    schema=$(jq -Rs '.' < "$schema_file")
+    response=$(curl -s -w "%{http_code}" -o /dev/null -X POST -H "Content-Type: application/vnd.schemaregistry.v1+json" \
+      --data "{\"schema\": $schema}" \
+      "$SCHEMA_REGISTRY_URL/subjects/$subject_name-value/versions")
+
+    if [ "$response" -eq 200 ] || [ "$response" -eq 201 ]; then
+      echo "Schema for subject $subject_name registered successfully."
+    else
+      echo "Failed to register schema for subject $subject_name. Response code: $response"
+    fi
+  fi
+}
+
+# /Users/makisekurisu/Desktop/kafka/KafkaInfra/avro 디렉토리의 모든 스키마 파일을 Schema Registry에 등록
+for schema_file in $AVRO_SCHEMAS_DIR/*.avsc; do
+  register_schema "$schema_file"
+done
+
+echo "Schema registration complete."
