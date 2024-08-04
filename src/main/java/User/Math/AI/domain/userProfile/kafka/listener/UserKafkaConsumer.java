@@ -63,4 +63,10 @@ public class UserKafkaConsumer {
         userProfileService.updateUserAttempt(message);
         log.info("###########updadt-attempt {}",message);
     }
+
+    @KafkaListener(topics = "user-update-attempt-success-topic", groupId = "group_id")
+    public void receiveAttemptSuccess(UserUpdateAttempt message) {
+        userProfileService.updateUserAttemptSuccess(message);
+        log.info("###########updadt-attempt-success {}",message);
+    }
 }

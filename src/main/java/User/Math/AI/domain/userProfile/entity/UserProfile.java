@@ -53,6 +53,11 @@ public class UserProfile {
 
     private Long rating;
 
+    @ElementCollection
+    private List<Long> attemptProblems;
+
+    private Long attemptCount;
+
     public static UserProfile createUserProfile(Users user, School school, String nickName) {
         return UserProfile.builder()
                 .nickName(nickName)
@@ -61,6 +66,12 @@ public class UserProfile {
                 .users(user)
                 .solvedProblems(new ArrayList<>())
                 .build();
+    }
+
+    public void addAttemptProblem(Long problemId) {
+        this.attemptProblems.add(problemId);
+        this.attemptCount = (long) this.attemptProblems.size();
+
     }
 
     public void addSolvedProblem(Long problemId) {

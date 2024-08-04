@@ -39,13 +39,13 @@ public class UserProfileService {
         userProfileRepository.save(userProfile);
     }
 
-    public void attemptAfterUpdateUserData(Long userId, Long problemId, String status) {
-        UserProfile target = userProfileRepository.findById(userId)
-                .orElseThrow(() -> new EntityNotFoundException("유저를 찾을 수 없음 userId: " + userId)).getUsers().getUserProfile();
-
-        target.addSolvedProblem(problemId);
-        userProfileRepository.save(target);
-    }
+//    public void attemptAfterUpdateUserData(Long userId, Long problemId, String status) {
+//        UserProfile target = userProfileRepository.findById(userId)
+//                .orElseThrow(() -> new EntityNotFoundException("유저를 찾을 수 없음 userId: " + userId)).getUsers().getUserProfile();
+//
+//        target.addSolvedProblem(problemId);
+//        userProfileRepository.save(target);
+//    }
 
 //    public void updateUserStatus(UserUpdateEvent event) {
 //        Users user = userRepository.findById(event.getUserId())
@@ -64,11 +64,21 @@ public class UserProfileService {
 
         UserProfile userProfile = userProfileRepository.findById(user.getId())
                 .orElseThrow(() -> new EntityNotFoundException("프로필 못찾음"));
+        userProfile.addAttemptProblem(message.getProblemId());
+        userProfileRepository.save(userProfile);
+
+        log.info("############name = {}", userProfile.getSchool().getName());
+    }
+
+    public void updateUserAttemptSuccess(UserUpdateAttempt message) {
+        Users user = userRepository.findById(message.getUserId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        UserProfile userProfile = userProfileRepository.findById(user.getId())
+                .orElseThrow(() -> new EntityNotFoundException("프로필 못찾음"));
         userProfile.addSolvedProblem(message.getProblemId());
         userProfileRepository.save(userProfile);
 
-
-        log.info("############name = {}", userProfile.getSchool().getName());
         // 나중에 school쪽으로 나누기
         School school = schoolRepository.findById(userProfile.getSchool().getId())
                 .orElseThrow(() -> new EntityNotFoundException("학교 못찾음"));
