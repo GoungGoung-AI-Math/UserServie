@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "name": "UserUpdateTest",
+  "namespace": "math.ai.my.kafka.infra.avrobuild",
+  "fields": [
+    {
+      "name": "nicknames",
+      "type": "string"
+    },
+    {
+      "name": "requestId",
+      "type": "string"
+    }
+  ]
+}
