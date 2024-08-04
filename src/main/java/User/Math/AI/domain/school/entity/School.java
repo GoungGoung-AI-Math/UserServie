@@ -28,4 +28,8 @@ public class School {
 
     @OneToMany(mappedBy = "school")
     private List<UserProfile> userProfiles;
+
+    public void addTotalSolved() {
+        this.totalSolved += 1;
+    }
 }

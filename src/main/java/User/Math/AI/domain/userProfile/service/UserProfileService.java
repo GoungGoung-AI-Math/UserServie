@@ -7,12 +7,13 @@ import User.Math.AI.domain.user.repository.UserRepository;
 import User.Math.AI.domain.userProfile.dto.request.AddInfoUserProfileRequest;
 import User.Math.AI.domain.userProfile.dto.response.UserProfileResponse;
 import User.Math.AI.domain.userProfile.entity.UserProfile;
+import User.Math.AI.domain.userProfile.kafka.event.UserUpdateEvent;
 import User.Math.AI.domain.userProfile.repository.UserProfileRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import math.ai.my.kafka.infra.avrobuild.UserProfileQuestionUpdateEvent;
-import math.ai.my.kafka.infra.avrobuild.UserUpdateEvent;
+import math.ai.my.kafka.infra.avrobuild.UserUpdateAttempt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,15 +47,33 @@ public class UserProfileService {
         userProfileRepository.save(target);
     }
 
-    public void updateUserStatus(UserUpdateEvent event) {
-        Users user = userRepository.findById(event.getUserId())
+//    public void updateUserStatus(UserUpdateEvent event) {
+//        Users user = userRepository.findById(event.getUserId())
+//                .orElseThrow(() -> new RuntimeException("User not found"));
+//
+//        // 유저 상태 업데이트 로직
+//        UserProfile userProfile = userProfileRepository.findById(user.getId())
+//                .orElseThrow(() -> new EntityNotFoundException("프로필 못찾음"));
+//        userProfile.addSolvedProblem(event.getProblemId());
+//        userProfileRepository.save(userProfile);
+//    }
+
+    public void updateUserAttempt(UserUpdateAttempt message) {
+        Users user = userRepository.findById(message.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        // 유저 상태 업데이트 로직
         UserProfile userProfile = userProfileRepository.findById(user.getId())
                 .orElseThrow(() -> new EntityNotFoundException("프로필 못찾음"));
-        userProfile.addSolvedProblem(event.getProblemId());
+        userProfile.addSolvedProblem(message.getProblemId());
         userProfileRepository.save(userProfile);
+
+
+        log.info("############name = {}", userProfile.getSchool().getName());
+        // 나중에 school쪽으로 나누기
+        School school = schoolRepository.findById(userProfile.getSchool().getId())
+                .orElseThrow(() -> new EntityNotFoundException("학교 못찾음"));
+        school.addTotalSolved();
+        schoolRepository.save(school);
     }
 
     public void updateUserProfileQuestion(UserProfileQuestionUpdateEvent event) {
