@@ -1,6 +1,6 @@
 package User.Math.AI.domain.userProfile.entity;
 
-import User.Math.AI.domain.like.entity.Likes;
+import User.Math.AI.domain.like.mvc.entity.Likes;
 import User.Math.AI.domain.school.entity.School;
 import User.Math.AI.domain.user.entity.Users;
 import jakarta.persistence.*;
@@ -9,7 +9,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,5 +70,9 @@ public class UserProfile {
 
     public void addQuestion(Long questionId) {
         this.questions.add(questionId);
+    }
+
+    public void addActionScore(UserActionScore actionScore){
+        rating += actionScore.getPoints();
     }
 }

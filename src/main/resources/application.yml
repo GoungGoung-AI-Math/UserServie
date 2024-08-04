@@ -24,7 +24,8 @@ kafka-consumer:
   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
   attempt-analysis-consumer-group-id: attempt-analysis-topic-consumer
-  group-id: group_id
+  user-update-group-id: user-update-topic-consumer
+  like-add-consumer-group-id: like-add-topic-consumer
   auto-offset-reset: earliest
   specific-avro-reader-key: specific.avro.reader
   specific-avro-reader: true
@@ -39,6 +40,8 @@ kafka-consumer:
   max-partition-fetch-bytes-boost-factor: 1
   poll-timeout-ms: 150
 
+user-service:
+  like-add-request-topic-name: like-add-request
 
 logging:
   level:

@@ -98,8 +98,8 @@ tasks.named('test') {
 
 // avro build
 def generateAvro = tasks.register("generateAvro", com.github.davidmc24.gradle.plugin.avro.GenerateAvroJavaTask) {
-	source("src/main/java/User/Math/AI/my/kafka/infra/avro")
-	outputDir = file("src/main/java/User/Math/AI/my/kafka/infra/avrobuild")
+	source("src/main/java/math/ai/my/kafka/infra/avro")
+	outputDir = file("src/main/java/math/ai/my/kafka/infra/avrobuild")
 	fieldVisibility = "PRIVATE"
 	enableDecimalLogicalType = true
 }

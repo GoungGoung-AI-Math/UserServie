@@ -3,6 +3,7 @@ HELP.md
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
+!**/src/main/**/avrobuild/
 !**/src/test/**/build/
 
 ### STS ###
@@ -35,3 +36,5 @@ out/
 
 ### VS Code ###
 .vscode/
+/src/main/resources/application-local.yml
+/src/main/java/math/ai/my/kafka/infra/avrobuild/**
